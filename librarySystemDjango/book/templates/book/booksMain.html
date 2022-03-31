@@ -1,0 +1,108 @@
+{% extends 'librarySystemDjango/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-books-container">
+        <div class="search-filters-box">
+            <h3>فیلتر</h3>
+            <hr>
+            <div class="filter-box-container">
+                <form action="{% url 'books:main_books_page' %}" method="GET">
+                    <div>
+                        <label for="slct-search-base">جستجو بر اساس</label>
+                        <select class="form-select slct-book-info-form" id="slct-search-base" name="search-base">
+                            <option selected>انتخاب کنید...</option>
+                            <option value="title">عنوان</option>
+                            <option value="author">نویسنده</option>
+                            <option value="translator">مترجم</option>
+                            <option value="publisher">انتشارات</option>
+                        </select>
+                        <div class="book-search-small-box">
+                            <input type="text" class="form-control book-search-input" placeholder="اطلاعات مورد نظر را وارد کنید..." name="book-info">
+                            <button type="submit" class="btn book-search-btn" title="جستجو"><img src="{% static 'icons/icons8-search-32-green.png' %}" alt="srch-icon" width="20px"></button>
+                        </div>
+                    </div>
+                    <div class="other-checkbox-container">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="free-checkbox">
+                          <label class="form-check-label" for="flexSwitchCheckDefault">عمومی</label>
+                        </div>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="premium-checkbox">
+                          <label class="form-check-label" for="flexSwitchCheckChecked">ویژه</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="available-checkbox">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">موجود در کتابخانه</label>
+                        </div>
+                    </div>
+                    <div class="categories-container">
+                        <h5>دسته بندی</h5>
+                        <hr>
+                        {% for cat in categories %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categories-radio-btn" id="flexRadioDefault{{forloop.counter}}" value="{{cat.name}}">
+                                <label class="form-check-label" for="flexRadioDefault{{forloop.counter}}">{{cat.name}}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary confirm-filters-btn">اعمال فیلتر</button>
+                </form>
+                
+            </div>   
+        </div>
+        <div class="book-cards-container">
+            {% if is_book %}
+                {% for book in page_obj %}
+                    <div class="card mb-3 book-card">
+                        <div class="row g-0">
+                        <div class="col-md-4">
+                            <a href="{% url 'books:book_info_page' book.title %}" target="_blank">
+                                <img src="/media/{{book.book_imgs}}" class="img-fluid rounded-start" alt="{{book.book_imgs}}">
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body book-card-body">
+                                <a href="{% url 'books:book_info_page' book.title %}" id="book-title" target="_blank"><h4 class="card-title">{{book.title}}</h4></a>
+                                <p class="card-text">نویسنده: {{book.author}}</p>
+                                {% if book.translator %}
+                                    <p class="card-text">مترجم: {{book.translator}}</p>
+                                {% else %}  
+                                    <p>زبان: فارسی</p>
+                                {% endif %}
+                                {% if book.free %}
+                                    <p class="card-text">عمومی <img src="{% static 'icons/icons8-free-60.png' %}" alt="free-icon" width="25px"></p>
+                                {% else %}  
+                                    <p class="card-text">ویژه <img src="{% static 'icons/icons8-premium-64.png' %}" alt="pre-icon" width="25px"></p>
+                                {% endif %}
+                                
+                                <a href="{% url 'books:book_info_page' book.title %}" class="btn btn-primary buy-book-btn" target="_blank">مشاهده</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" class="previous">&laquo; قبلی</a>
+                            <a href="?page=1" class="previous">ابتدا</a>
+                        {% endif %}
+            
+                        <span class="current-page-txt">
+                            صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}
+                        </span>
+            
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.paginator.num_pages }}" class="next">انتها</a>
+                            <a href="?page={{ page_obj.next_page_number }}" class="next">بعدی &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% else %}
+                <h3 id="book-not-found-txt">کتابی یافت نشد.</h3>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}

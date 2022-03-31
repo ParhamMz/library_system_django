@@ -1,0 +1,121 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load jformat %}
+
+{% block title %}
+<title>کاربران سایت</title>
+{% endblock %}
+
+{% block admin_content %}
+    <div class="users-list-container">
+        <div class="users-list-page-header-box">
+            <a href="{% url 'account:users_list_page' %}"><h3 id="header-list-text">لیست کاربران سامانه</h3></a>
+            <form class="search-form" id="search-form-of-users" action="{% url 'account:users_list_page' %}" method="GET">
+                <input class="form-control me-2 search-users" type="search" placeholder="کد ملی کاربر مورد نظر را وارد کنید" aria-label="Search" name="searched_name">
+                <button class="btn btn-outline-success" type="submit">جستجو</button>
+            </form>
+            {% if messages %}
+                <div class="success-messages-box">
+                    {% for message in messages %}
+                    <p  {% if message.tags %} class="{{message.tags}}-message-txt" {% endif %}> {{ message }} </p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <hr id="seprator-header-list">
+
+        {% if all_users %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>عکس</th>
+                        <th>نام و نام خانوادگی</th>
+                        <th>نام کاربری</th>
+                        <th>تنظیمات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for the_user in all_users %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td><img src="/media/{{the_user.profile_pic}}" alt="{{the_user.profile_pic}} - alt" id="profile-image"></td>
+                            <td>{{the_user.user.first_name}} {{the_user.user.last_name}}</td>
+                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#{{the_user.user}}Modal">{{the_user.user}}@</a></td>
+                            <td>
+                                <button type="button" class="btn btn-primary users-edit-btn" title="ویرایش" data-bs-toggle="modal" data-bs-target="#{{the_user.user}}Modal"><img src="{% static 'icons/icons8-edit-64.png' %}" alt="edit-icon" width="30px"></button>
+                                {% if request.user.is_superuser %}
+                                    <a href="{% url 'account:promotion_page' the_user.user %}" class="btn btn-success user-promote-btn" title="تغییر نقش به ادمین"><img src="{% static 'icons/icons8-promotion-64.png' %}" alt="promote-icon" width="28px"></a>
+                                {% endif %}
+                                <a href="{% url 'account:delete_user' the_user.user %}" class="btn btn-danger users-del-btn" title="حذف کاربر"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></a>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="{{the_user.user}}Modal" tabindex="-1" aria-labelledby="{{the_user.user}}ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header user-info-modal-header">
+                                  <h5 class="modal-title" id="{{the_user.user}}ModalLabel">اطلاعات کاربر</h5>
+                                  <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                    src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>نام و نام خانوادگی: {{the_user.user.first_name}} {{the_user.user.last_name}}</p>
+                                    <p>ایمیل: {{the_user.user.email}}</p>
+                                    <p>کد ملی: {{the_user.national_code}}</p>
+                                    <p>تاریخ تولد: {{the_user.birth_date}}</p>
+                                    <p>شماره همراه: {{the_user.phone_no}}</p>
+                                    <p>کد دعوت: {{the_user.invitation_code}}</p>
+                                    <p>تعداد دعوت شدگان توسط کاربر: {{the_user.invited_people}}</p>
+                                    <p>تعداد کتاب‌های امانت گرفته: {{the_user.lent_num}}</p>
+                                    {% if the_user.allowed_to_lend %}
+                                        <p>مجاز به امانت گرفتن: بله</p>
+                                    {% else %}
+                                        <p>مجاز به امانت گرفتن: خیر</p>                                  
+                                    {% endif %}
+                                    {% if the_user.subscription_type %}
+                                        <p id="user-subs-type-txt">نوع اشتراک: {{the_user.subscription_type}}</p>
+                                        <a href="{% url 'account:delete_subs' the_user.user %}" class="btn btn-danger delete-subs-btn" title="حذف اشتراک">
+                                            <img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="25px">
+                                        </a>
+                                        <p>تاریخ شروع اشتراک: {{the_user.start_subs|jformat:"%A %d %B %Y %H:%M"}}</p>
+                                        <p>تاریخ اتمام اشتراک: {{the_user.end_subs|jformat:"%A %d %B %Y %H:%M"}}</p>
+                                        <div class="dedicated-books-box">
+                                            <form action="{% url 'account:add_dedicated_page' the_user.user %}" method="POST">
+                                                {% csrf_token %}
+                                                <label>تعداد کتاب‌های اهدا شده: </label>
+                                                <input type="number" class="form-control dedicated-books-inp" value="{{the_user.dedicated_book}}" name="dedicate-field">
+                                                <button type="button" class="btn btn-secondary cancel-show-userinfo-btn" data-bs-dismiss="modal">بستن</button>
+                                                <button type="submit" class="btn btn-success save-show-userinfo-btn">ذخیره</button>
+                                            </form>
+                                        </div>
+                                    {% else %}
+                                        <p>اشتراک: بدون اشتراک</p>
+                                        <form action="{% url 'account:buysub_page' the_user.user %}" method="POST">
+                                            {% csrf_token %}
+                                            <select class="form-select buy-sub-form" aria-label="Default select example" name="subs-selection">
+                                                <option selected>انتخاب اشتراک</option>
+                                                <option value="1">برنزی(یک ماهه) - ۱۰۰۰۰ تومان</option>
+                                                <option value="3">نقره‌ای(سه ماهه) - ۲۵۰۰۰ تومان</option>
+                                                <option value="12">طلایی(یک ساله) - ۱۰۰۰۰۰ تومان</option>
+                                            </select>
+                                            <label>تعداد کتاب‌های اهدا شده: </label>
+                                            <input type="number" class="form-control dedicated-books-inp" value="{{the_user.dedicated_book}}" name="dedicate-field">
+                                            <button type="button" class="btn btn-secondary cancel-show-userinfo-btn" data-bs-dismiss="modal">لغو</button>
+                                            <button type="submit" class="btn btn-success save-show-userinfo-btn">ذخیره</button>
+                                        </form>
+                                        
+                                    {% endif %}
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>کاربر مورد نظر یافت نشد.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

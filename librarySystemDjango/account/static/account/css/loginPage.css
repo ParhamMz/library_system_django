@@ -1,0 +1,54 @@
+.login-container{
+    background-color: white;
+    width: 40%;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 0.1px black;
+    margin-bottom: 20px;
+    font-family: 'Vazir', Arial, sans-serif;
+    direction: rtl;
+}
+
+.login-container h1{
+    text-align: center;
+}
+
+.login-container input{
+    margin-top: 0;
+}
+
+.recaptcha-box{
+    direction: ltr;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.login-btn{
+    width: 47%;
+}
+
+.register-btn{
+    width: 47%;
+    margin-right: 5%;
+}
+
+.bckground-fixed{
+    position: relative;
+    /* height: 1500px; */
+}
+
+.error-messages-box{
+    width: max-content;
+    padding: 10px;
+    background-color: rgb(255, 131, 131);
+    border: 1px solid rgb(49, 0, 0);
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.error-message-txt{
+    color: rgb(49, 0, 0);
+    font-size: 14px;
+    margin: 0;
+}

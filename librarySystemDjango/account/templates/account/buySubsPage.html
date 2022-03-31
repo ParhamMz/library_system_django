@@ -1,0 +1,35 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block member_content %}
+    <div class="subscription-card-container">
+        <div class="card subscription-card" id="golden-subscription-card">
+            <div class="card-body">
+              <h5 class="card-title">اشتراک طلایی</h5>
+              <h6 class="card-subtitle mb-2 text-muted">یک ساله</h6>
+              <hr>
+              <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, in. Reprehenderit facilis asperiores consequatur rerum deserunt nesciunt optio totam voluptates pariatur quam dolores voluptas omnis harum atque, fugit quae aliquid.</p>
+              <a href="{% url 'account:bank_page' 'golden(12 months)' 12 %}" class="btn btn-primary">خرید اشتراک</a>
+            </div>
+        </div>
+        <div class="card subscription-card" id="silver-subscription-card">
+            <div class="card-body">
+              <h5 class="card-title">اشتراک نقره‌ای</h5>
+              <h6 class="card-subtitle mb-2 text-muted">سه ماهه</h6>
+              <hr>
+              <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, in. Reprehenderit facilis asperiores consequatur rerum deserunt nesciunt optio totam voluptates pariatur quam dolores voluptas omnis harum atque, fugit quae aliquid.</p>
+              <a href="{% url 'account:bank_page' 'silver(3 months)' 3 %}" class="btn btn-primary">خرید اشتراک</a>
+            </div>
+        </div>
+        <div class="card subscription-card" id="bronze-subscription-card">
+            <div class="card-body">
+              <h5 class="card-title">اشتراک برنزی</h5>
+              <h6 class="card-subtitle mb-2 text-muted">یک ماهه</h6>
+              <hr>
+              <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, in. Reprehenderit facilis asperiores consequatur rerum deserunt nesciunt optio totam voluptates pariatur quam dolores voluptas omnis harum atque, fugit quae aliquid.</p>
+              <a href="{% url 'account:bank_page' 'bronze(1 months)' 1 %}" class="btn btn-primary">خرید اشتراک</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+.bank-page-container{
+    width: 55%;
+    /* height: 25%; */
+    text-align: center;
+    direction: rtl;
+    font-family: 'Vazir', Arial, sans-serif;
+    box-shadow: 0 0 5px rgb(161, 161, 161);
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.bank-page-container label{
+    margin-bottom: 10px;
+}
+
+.bank-page-container input{
+    margin-bottom: 15px;
+    direction: ltr;
+    text-align: center;
+}
+
+#redirectTimer{
+    margin-top: 25px;
+}

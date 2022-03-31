@@ -1,0 +1,20 @@
+.add-book-form-container{
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 0.1px black;
+    direction: rtl;
+    text-align: right;
+    padding: 20px;
+}
+
+.confirm-add-btn{
+    display: block;
+    width: 100%;
+    margin-top: 45px;
+    margin-bottom: 15px;
+}
+
+.cancel-add-btn{
+    display: block;
+    width: 100%;
+}

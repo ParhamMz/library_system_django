@@ -1,0 +1,141 @@
+{% extends 'librarySystemDjango/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="book-info-main-container">
+        <div class="book-small-container">
+            <div class="book-img-container">
+                <img src="/media/{{the_book.book_imgs}}" alt="{{the_book.title}} - img" title="کتاب {{the_book.title}}">
+            </div>
+            {% if the_book.book_pdf %}
+                {% if the_book.free %}
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'books:dwnld_book' filename=the_book.book_pdf %}" class="btn btn-primary book-download-btn"><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</a>
+                    {% else %}
+                        <button class="btn btn-secondary book-download-btn" title="باید به حساب کاربری خود وارد شوید." disabled><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</button>
+                    {% endif %}
+                {% else %}
+                    {% if loggedin_user and not loggedin_user.is_staff %}
+                        {% if not user_profile.subscription_type %}
+                            <a href="#" class="btn btn-primary book-download-btn" data-bs-toggle="modal" data-bs-target="#donlowdErrormodal"><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</a>
+                            <div class="modal fade" id="donlowdErrormodal" tabindex="-1" aria-labelledby="donlowdErrormodalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="donlowdErrormodalLabel">خطا!</h5>
+                                      <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                        src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>برای استفاده از این کتاب، باید اشتراک تهیه کنید.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                      <a href="{% url 'account:subs_services_page' %}" class="btn btn-primary">خرید اشتراک</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        {% else %}
+                            <a href="{% url 'books:dwnld_book' filename=the_book.book_pdf %}" class="btn btn-primary book-download-btn"><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</a>   
+                        {% endif %}
+                    {% elif loggedin_user.is_staff %}
+                        <a href="{% url 'books:dwnld_book' filename=the_book.book_pdf %}" class="btn btn-primary book-download-btn"><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</a>
+                    {% else %}
+                        <button class="btn btn-secondary book-download-btn" title="باید به حساب کاربری خود وارد شوید." disabled><img src="{% static 'icons/icons8-download-50.png' %}" alt="dwn - icon" width="25px"> دانلود فایل کتاب</button>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            <div class="book-options-box">
+                <div class="favorite-option">
+                    {% if not request.user.is_staff %}
+                        {% if user.is_authenticated %}
+                            {% if not is_favorite %}
+                                <form method='POST'>
+                                    {% csrf_token %}
+                                    <button class="btn favorite-btn">افزودن به مورد علاقه‌ها</button>
+                                </form>
+                            {% else %}
+                                <form method='POST'>
+                                    {% csrf_token %}
+                                    <button class="btn favorite-btn">حذف از مورد علاقه‌ها</button>
+                                </form>
+                            {% endif %}
+
+                        {% else %}
+                            <button class="btn favorite-btn" onclick="loginNeededMsg()">افزودن به مورد علاقه‌ها</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="edit-option">
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'account:update_book' the_book.title %}" class="btn edit-btn">ویرایش</a>
+                    {% endif %}
+                </div>
+                <div class="animate slide-in-down notification-button">
+                    لینک کتاب کپی شد.
+                </div>
+                <div class="share-option">
+                    <div class="share-container">
+                        <div class="share-btn" id="{{request.path}}">اشتراک گذاری</div>
+                        <div contenteditable="true" class="share-url"></div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="book-info-container">
+            <h5 id="brand-txt-book"><img src="{% static 'icons/icons8-book-64.png' %}" alt="book-alt" width="45px"> اطلاعات کتاب</h5>
+            {% if the_book.free %}
+                <img class="free-icon-abs" src="{% static 'icons/icons8-free-60-blue.png' %}" alt="free-alt" width="45px" title="عمومی">
+            {% else %}
+                <img class="free-icon-abs" src="{% static 'icons/icons8-premium-64-blue.png' %}" alt="free-alt" width="45px" title="ویژه - برای استفاده از این کتاب، باید اشتراک تهیه کنید">
+            {% endif %}
+            <h3 class="book-info-txt">کتاب {{the_book.title}}</h3>
+            <h6 class="book-info-txt">نویسنده: {{the_book.author}}</h6>
+            {% if the_book.translator %}
+                <p class="book-info-txt">مترجم: {{the_book.translator}}</p>
+            {% endif %}
+            <p class="book-info-txt">تعداد صفحات: {{the_book.pages}}</p>
+            <p class="book-info-txt">انتشارات: {{the_book.publisher}}</p>
+            <p class="book-info-txt">سال انتشار: {{the_book.publication_year}}</p>
+            <p class="book-info-txt">دسته بندی: {{the_book.category}}</p>
+            {% if the_book.available %}
+                <p class="book-info-txt">کتاب در کتابخانه موجود می‌باشد.</p>
+            {% else %}
+                <p class="book-info-txt">در حال حاضر کتاب در کتابخانه موجود نیست.</p>
+            {% endif %}
+            
+        </div>
+    </div>
+    <!-- Swiper -->
+    <div class="other-books-swiper-container">
+        <h4>کتاب های مشابه</h4>
+        <hr>
+        <!-- {% if alike_books %}
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-btn prev-swiper-btn">&raquo;</div>
+                    {% for other in alike_books %}
+                        <div class="swiper-slide">
+                            <a href="{% url 'books:book_info_page' other.title %}">
+                                <img src="/media/{{other.book_imgs}}" alt="{{other.title}} - img">
+                                <h5>{{other.title}}</h5>
+                            </a>
+                            
+                        </div>
+                    {% endfor %}
+
+
+                    <div class="swiper-btn next-swiper-btn">&laquo;</div>
+                </div>
+            </div>
+        {% else %}
+            <p>کتاب مشابهی با این موضوع وجود ندارد.</p>
+        {% endif %} -->
+        <p>در دست احداث...</p>
+    </div>
+{% endblock %}

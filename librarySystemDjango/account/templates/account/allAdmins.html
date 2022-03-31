@@ -1,0 +1,51 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load jformat %}
+
+{% block title %}
+<title>کاربران سایت</title>
+{% endblock %}
+
+{% block admin_content %}
+    <div class="users-list-container">
+        <div class="users-list-page-header-box">
+            <a href="{% url 'account:admins_list_page' %}"><h3 id="header-list-text">لیست ادمین‌های سامانه</h3></a>
+        </div>
+        <hr id="seprator-header-list">
+
+        {% if admins %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نام و نام خانوادگی</th>
+                        <th>نام کاربری</th>
+                        <th>ایمیل</th>
+                        {% if request.user.is_superuser %}
+                            <th>تنظیمات</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for admin in admins %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{admin.first_name}} {{admin.last_name}}</td>
+                            <td>{{admin.username}}@</td>
+                            <td>{{admin.email}}</td>
+                            {% if request.user.is_superuser %}
+                                <td>
+                                    <a href="{% url 'account:delete_user' admin.username %}" class="btn btn-danger users-del-btn" title="حذف کاربر"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>ادمین مورد نظر یافت نشد.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

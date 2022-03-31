@@ -1,0 +1,11 @@
+{% extends 'librarySystemDjango/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="about-header">
+        <h2 class="about-header-txt">مایی وجود نداره فقط منم.</h2>
+        <p class="about-header-txt">تاریخ شروع پروژه: شنبه ۲۳ بهمن ۱۴۰۰</p>
+        <p class="about-header-txt">تاریخ اتمام پروژه: "bugs are endless"</p>
+        <img src="{% static 'images/private logo1.png' %}" alt="logo - alt" id="about-img" onclick="startStop()" class="my-logo">
+        <p id="logo-hint" onclick="startStop()">Press to stop</p>
+    </div>
+{% endblock %}

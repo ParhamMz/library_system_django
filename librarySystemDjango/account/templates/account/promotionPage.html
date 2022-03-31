@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Promotion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'account/css/promotionPage.css' %}">
+
+</head>
+
+<body>
+
+    <div class="promote-page-container">
+        <form method='POST'>
+            {% csrf_token %}
+            <h3 class="promote-acc-text">آیا می‌خواهید نقش حساب کاربری {{the_user.first_name}} {{the_user.last_name}} را به ادمین تغییر دهید؟</h3>
+            <a href="{% url 'account:users_list_page' %}" class="btn btn-secondary cancel-acc-btn">انصراف</a>
+            <button type="submit" class="btn btn-success promote-acc-btn">تائید</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+</body>
+
+</html>

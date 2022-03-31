@@ -1,0 +1,77 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load jformat %}
+
+{% if request.user.is_staff %}
+    {% block admin_content %}
+    <div class="users-list-container">
+        <div class="users-list-page-header-box">
+            <a href="{% url 'account:subs_records_page' %}"><h3 id="header-list-text">سابقه اشتراک‌ها</h3></a>
+            <form class="search-form" id="search-form-of-users" action="{% url 'account:subs_records_page' %}" method="GET">
+                <input class="form-control me-2 search-users" type="search" placeholder="نام کاربری مورد نظر را وارد کنید." aria-label="Search" name="searched_name">
+                <button class="btn btn-outline-success" type="submit">جستجو</button>
+            </form>
+        </div>
+        <hr id="seprator-header-list">
+
+        {% if subs_records and not no_record %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>کاربر</th>
+                        <th>نوع اشتراک</th>
+                        <th>زمان ثبت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i, record in subs_records %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{record.user}}</td>
+                            <td>{{record.subscription_type}}</td>
+                            <td>{{record.set_date|jformat:"%A %d %B %Y %H:%M"}}</td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>رکوردی برای نمایش وجود ندارد.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+{% else %}
+    {% block member_content %}
+    <div class="users-list-container">
+        <div class="users-list-page-header-box">
+            <a href="{% url 'account:subs_records_page' %}"><h5 id="header-list-text">سابقه اشتراک‌ها</h5></a>
+            <p>۵۰ اشتراک اخیر شما</p>
+        </div>
+        <hr id="seprator-header-list">
+        {% if subs_records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نوع اشتراک</th>
+                        <th>زمان ثبت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i, record in subs_records %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{record.subscription_type}}</td>
+                            <td>{{record.set_date|jformat:"%A %d %B %Y %H:%M"}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>رکوردی برای نمایش وجود ندارد.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+{% endif %}

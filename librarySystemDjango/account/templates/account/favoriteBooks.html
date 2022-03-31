@@ -1,0 +1,61 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block member_content %}
+<div class="users-list-container">
+    <div class="users-list-page-header-box">
+        <a href="{% url 'account:favorite_page' %}"><h5 id="header-list-text">لیست کتاب‌های مورد علاقه</h5></a>
+        <form class="search-form" id="search-form-of-users" action="{% url 'account:favorite_page' %}" method="GET">
+            <input class="form-control me-2 search-users" type="search" placeholder="عنوان کتاب مورد نظر را وارد کنید." aria-label="Search" name="searched_name">
+            <button class="btn btn-outline-success" type="submit">جستجو</button>
+        </form>
+    </div>
+    <hr id="seprator-header-list">
+    {% if favorites %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>عنوان</th>
+                    <th>اطلاعات کتاب</th>
+                    <th>تنظیمات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fav_book in favorites %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{fav_book.title}}</td>
+                        <td><a href="{% url 'books:book_info_page' fav_book.title %}">{{fav_book.title}}</a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger users-del-btn" data-bs-toggle="modal" data-bs-target="#hey{{fav_book.id}}Modal"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></button>
+                        </td>
+                    </tr>
+                    
+                    <div class="modal fade" id="hey{{fav_book.id}}Modal" tabindex="-1" aria-labelledby="hey{{fav_book.id}}ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="hey{{fav_book.id}}ModalLabel">هشدار</h5>
+                              <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                            </div>
+                            <div class="modal-body">
+                              <h6>آیا می‌خواهید این کتاب را از لیست مورد علاقه های خود حذف کنید؟</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">خیر</button>
+                                <a href="{% url 'account:del_favorite_page' fav_book.title %}" class="btn btn-danger">بله</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>کتابی برای نمایش وجود ندارد.</p>
+    {% endif %}
+</div>
+{% endblock %}

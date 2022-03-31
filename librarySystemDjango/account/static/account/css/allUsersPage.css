@@ -1,0 +1,116 @@
+
+#header-list-text{
+    font-weight: bold;
+    text-align: right;
+    display: inline-block;
+}
+
+.users-list-page-header-box form{
+    display: inline-block;
+    width: 79%;
+    text-align: left;
+}
+
+.search-users{
+    display: inline-block;
+    border-radius: 5px;
+    width: 35%;
+
+}
+
+#seprator-header-list{
+    margin: 20px 0;
+}
+
+.users-list-container {
+    box-shadow: 0 0 5px rgb(161, 161, 161);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.users-list-container table{
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
+    text-align: center;
+    font-family: 'Vazir', Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+.users-list-container th{
+    border-bottom: 1px solid rgb(160, 160, 189);
+    padding: 15px; 
+}
+
+.users-list-container td{
+    border-bottom: 1px solid rgb(160, 160, 189);
+    padding: 15px; 
+}
+
+.users-del-btn{
+    padding: 1px;
+    border: 1px solid white;
+    margin-right: 5px;
+}
+
+.user-promote-btn{
+    padding: 2px;
+    border: 1px solid white;
+    margin-right: 5px;
+}
+
+.users-edit-btn{
+    padding: 1px;
+    border: 1px solid white;
+}
+
+#profile-image{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+}
+
+.dedicated-books-inp{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    direction: ltr;
+}
+
+.buy-sub-form{
+    background-position: left 0.75rem center;
+}
+
+.user-info-modal-header button{
+    margin-right: 25px;
+
+}
+
+.save-show-userinfo-btn{
+    display: inline-block;
+    width: 38%;
+    margin-top: 20px;
+}
+
+.cancel-show-userinfo-btn{
+    display: inline-block;
+    width: 38%;
+    margin-left: 23%;
+    margin-top: 20px;
+}
+
+.close-show-userinfo-btn{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.delete-subs-btn{
+    display: inline-block;
+    padding: 0;
+    margin-right: 3%;
+}
+
+#user-subs-type-txt{
+    display: inline-block;
+}

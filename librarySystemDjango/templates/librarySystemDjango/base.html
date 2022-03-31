@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% block title %}
+            <title>PMz</title>
+        {% endblock %}
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script> -->
+        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet"/> -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        
+        <!-- Persian DatePicker -->
+        <!-- <link rel="stylesheet" href="css/persian.datepicker.css"/>
+        <script src="js/jquery.js"></script>
+        <script src="js/persian.date.js"></script>
+        <script src="js/persian.datepicker.js"></script> -->
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'master.css' %}">
+        
+        <link rel="stylesheet" href="{% static 'account/css/loginPage.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/registration.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/userProfile.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/allUsersPage.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/buySubsPage.css' %}">
+        
+        <link rel="stylesheet" href="{% static 'book/css/booksMain.css' %}">
+        <link rel="stylesheet" href="{% static 'book/css/addBPage.css' %}">
+        <link rel="stylesheet" href="{% static 'book/css/bookInfo.css' %}">
+
+
+
+
+        <!-- FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"> 
+
+    </head>
+    <body>
+        {% if request.path == '/' %}
+            <div class="modal fade" id="staticBackdropFirstPage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropFirstPageLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropFirstPageLabel">خوش آمدید</h5>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                        <img src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" />
+                        </button>
+                    </div>
+                    <div class="modal-body" id="preloading-box">
+                        <p id="first">این سایت تنها یک  پروژه شخصی است و هیچ مسئولیتی در قبال اطلاعات شما ندارد ولی اگر هک نشیم اطلاعاتتون جاش امنه :)</p>
+                        <p>بعضی کتاب‌ها و اطلاعات آن‌ها نامعتبر می‌باشد، پس به اطلاعات آن‌ها استناد نکنید.</p>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">تائید</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(window).on('load',function(){
+                    $('#staticBackdropFirstPage').modal('show');
+                });
+            </script>
+        
+        {% endif %}
+
+        <div class="navbar-container" id="main-navbar">
+            <ul class="nav justify-content-center">
+                <a class="navbar-brand" href="/">
+            <img src="{% static 'images/private logo1-black.png' %}" id="navbar-brand" alt="logo - alt" width="46px">
+                    </a>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">خانه</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'books:main_books_page' %}">کتاب‌ها</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">شما</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item dp-item-mine" href="{% url 'account:profile_page' %}">پروفایل</a></li>
+                            <li><a class="dropdown-item dp-item-mine" href="{% url 'account:logout_page' %}">خروج</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'account:login_page' %}" role="button" aria-expanded="false">ورود</a>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item dp-item-mine" href="{% url 'account:login_page' %}">مدیر</a></li>
+                        <li><a class="dropdown-item dp-item-mine" href="{% url 'account:login_page' %}">اعضا</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account:register_page' %}">عضویت</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about_page' %}">درباره ما</a>
+                </li>
+            </ul>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="footer-container">
+            <hr>
+            <div class="logo-container">
+                <img src="{% static 'images/private logo1-black.png' %}" alt="logo - alt" id="about-img">
+            </div>
+            <div class="footer-txt-container">
+                <div class="social-box insta-box">
+                    <a href="instagram:https://www.instagram.com/parham_mz11/" class="fa fa-instagram" title="parham_mz11"></a>
+                    <a href="instagram:https://www.instagram.com/parham_mz11/" class="social-link-txt" title="parham_mz11">
+                        <p class="social-icons-txt">صفحه اینستاگرام</p>
+                    </a>
+                </div>
+                <div class="social-box gmail-box">
+                    <a href="mailto: p.mazahery11@gmail.com" class="fa fa-google" title="p.mazahery11@gmail.com"></a> 
+                    <a href="mailto: p.mazahery11@gmail.com" class="social-link-txt" title="p.mazahery11@gmail.com">
+                        <p class="social-icons-txt">رایانامه</p>
+                    </a>
+                </div>
+                <div class="site-explanations">
+                    <p>
+                        اکثر کتاب‌ها و اطلاعات آن‌ها نامعتبر می‌باشد، پس به اطلاعات آن‌ها استناد نکنید. 
+                    </p>
+                    <p>
+                        خوشحال میشم اگر نظرات و مشکلات سایت رو در <a href="instagram:https://www.instagram.com/parham_mz11/" title="parham_mz11">دایرکت اینستاگرام</a> و یا از طریق <a href="mailto: p.mazahery11@gmail.com" title="p.mazahery11@gmail.com">رایانامه</a> با من به اشتراک بگذارید.
+                    </p>
+                </div>
+            </div>
+            <div class="technology-box">
+                <strong>تکنولوژی‌های استفاده شده:</strong>
+                <div class="technology-logos">
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=python" title="Google Me" target="_blank">
+                            <img src="{% static 'images/Python-logo.png' %}" alt="python" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=django" title="Google Me" target="_blank">
+                            <img src="{% static 'images/django-logo.png' %}" alt="django" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=sqlite" title="Google Me" target="_blank">
+                            <img src="{% static 'images/sqlite3-logo.png' %}" alt="sqlite" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=html" title="Google Me" target="_blank">
+                            <img src="{% static 'images/html5-logo.png' %}" alt="html" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=css" title="Google Me" target="_blank">
+                            <img src="{% static 'images/css3-logo.png' %}" alt="css" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=js" title="Google Me" target="_blank">
+                            <img src="{% static 'images/js-logo.png' %}" alt="js" width="50px">
+                        </a>
+                    </div>
+                    <div class="technology-item">
+                        <a href="https://www.google.com/search?q=bootstrap" title="Google Me" target="_blank">
+                            <img src="{% static 'images/Bootstrap-logo.png' %}" alt="bootstrap" width="50px">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p id="last-txt">این سایت تنها یک  پروژه شخصی است و هیچ مسئولیتی در قبال اطلاعات شما ندارد. <span>™</span></p>
+        </div>
+
+        <button onclick="topFunction()" id="myBtn" title="برو به اول صفحه"><img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/50/000000/external-up-arrow-basic-ui-elements-flatart-icons-outline-flatarticons-3.png" width="40px" height="40px"/></button> 
+
+        <!-- Bootstrap Js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        <!-- <script src="http://www.jakse.si/test/jakse/taxi/js/swiper.min.js"></script> -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <!-- Js -->
+        <script src="{% static 'master.js' %}"></script>
+
+        <script src="{% static 'account/js/userProfile.js' %}"></script>
+        <script src="{% static 'account/js/allUsersPage.js' %}"></script>
+        <script src="{% static 'account/js/buySubsPage.js' %}"></script>
+        <script src="{% static 'account/js/registration.js' %}"></script>
+        <script src="{% static 'account/js/editPassPage.js' %}"></script>
+        <script src="{% static 'account/js/loginPage.js' %}"></script>
+        
+        <script src="{% static 'book/js/booksMain.js' %}"></script>
+        <script src="{% static 'book/js/addBPage.js' %}"></script>
+        <script src="{% static 'book/js/bookInfo.js' %}"></script>
+
+        <!-- <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+		<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+        -->
+    </body>
+</html>

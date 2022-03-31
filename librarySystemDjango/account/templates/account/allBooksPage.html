@@ -1,0 +1,52 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block admin_content %}
+<div class="users-list-container">
+    <div class="users-list-page-header-box">
+        <a href="{% url 'account:books_list_page' %}"><h3 id="header-list-text">لیست کتاب‌ها</h3></a>
+        <form class="search-form" id="search-form-of-users" action="{% url 'account:books_list_page' %}" method="GET">
+            <input class="form-control me-2 search-users" type="search" placeholder="عنوان کتاب مورد نظر را وارد کنید." aria-label="Search" name="searched_name">
+            <button class="btn btn-outline-success" type="submit">جستجو</button>
+        </form>
+        {% if messages %}
+            <div class="success-messages-box">
+                {% for message in messages %}
+                <p  {% if message.tags %} class="{{message.tags}}-message-txt" {% endif %}> {{ message }} </p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <hr id="seprator-header-list">
+
+    {% if books %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>عنوان</th>
+                    <th>اطلاعات کتاب</th>
+                    <th>تنظیمات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{book.title}}</td>
+                        <td><a href="{% url 'books:book_info_page' book.title %}">{{book.title}}</a></td>
+                        <td>
+                            <a href="{% url 'account:update_book' book.title %}" class="btn btn-primary users-edit-btn" title="ویرایش"><img src="{% static 'icons/icons8-edit-64.png' %}" alt="edit-icon" width="30px"></a>
+                            <a href="{% url 'account:delete_book' book.title %}" class="btn btn-danger users-del-btn" title="حذف"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></a>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>کتابی برای نمایش وجود ندارد.</p>
+    {% endif %}
+</div>
+{% endblock %}

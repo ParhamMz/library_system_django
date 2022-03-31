@@ -1,0 +1,255 @@
+/* The side navigation menu */
+.sidenav {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    right: 0;
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+}
+
+#user-profile-sidenav-hr{
+    margin: 2.5px 20px;
+    color: #818181;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    font-family: 'Vazir', Arial, sans-serif;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    direction: rtl;
+    text-align: right;
+    margin-right: 20px;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    font-size: 36px;
+    margin-right: 50px;
+}
+
+.sidenav-btn-container{
+    direction: rtl;
+    text-align: right;
+    padding: 15px;
+    background-color: #111;
+}
+
+.sidenav-btn-container p{
+    display: inline-block;
+    color: white;
+    font-family: 'Vazir', Arial, sans-serif;
+    font-size: 25px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.side-navbar-btn{
+    display: inline-block;
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid #1591d8;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#user-profile-sidenav {
+    transition: margin-right .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.user-profile-container{
+    direction: rtl;
+    font-family: 'Vazir', Arial, sans-serif;
+}
+
+.user-profile-header-container{
+    box-shadow: 0 0 5px rgb(161, 161, 161);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.user-profile-header-text-container{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+.user-profile-header-container .profile-img{
+    border-radius: 50%;
+    border: 2px solid rgb(17, 17, 17);
+}
+
+.user-profile-header-container p{
+    text-align: right;
+    margin-top: 15px;
+}
+
+#username-in-header{
+    color: rgb(133, 133, 133);
+    display: inline-block;
+}
+
+#invitaion-code-in-header{
+    color: rgb(133, 133, 133);
+    display: inline-block;
+    margin-right: 20%;
+}
+
+.profile-del-btn{
+    padding: 1px;
+    border: 1px solid white;
+    margin-right: 5px;
+    float: left;
+}
+
+.subscription-box{
+    background-color: #0d6efd;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.subscription-box p{
+    color: white;
+}
+
+.subscription-text-box{
+    display: inline-block;
+}
+
+.invitaion-guide-text{
+    font-size: 14px;
+}
+
+.countdown-container{
+    display: inline-block;
+    vertical-align: top;
+    direction: ltr;
+    margin-right: 25%;
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+}
+
+.user-profile-informations{
+    box-shadow: 0 0 5px rgb(161, 161, 161);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.user-profile-informations #div_id_password{
+    display: none;
+}
+
+.user-profile-informations #div_id_confirm_password{
+    display: none;
+}
+
+.hashtagme .form-group{
+    display: inline-block;
+    width: 45%;
+    margin: 0 2.3%;
+}
+
+.edit-user-info-btn{
+    display: inline-block;
+    width: 44%;
+    margin-top: 20px;
+}
+
+.edit-user-info-btn img{
+    display: inline-block;
+}
+
+.cancel-edit-user-info-btn{
+    display: inline-block;
+    width: 44%;
+    margin-left: 11.3%;
+    margin-top: 20px;
+}
+
+.cancel-edit-user-info-btn img{
+    display: inline-block;
+}
+
+.edit-pass-container{
+    font-family: 'Vazir', Arial, sans-serif;
+}
+
+.edit-pass-container label{
+    direction: rtl;
+}
+
+.edit-pass-header{
+    direction: rtl;
+}
+
+.edit-pass-header button{
+    margin-right: 25px;
+}
+
+.edit-pass-header h5{
+    font-family: 'Vazir', Arial, sans-serif;
+
+}
+
+.edit-pass-container button{
+    width: 40%;
+    margin-top: 25px;
+}
+
+.cancel-edit-pass-btn{
+    margin-left: 18.5%;
+}
+
+.success-messages-box{
+    width: max-content;
+    padding: 10px;
+    background-color: rgb(175, 255, 175);
+    border: 1px solid rgb(0, 49, 0);
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.success-message-txt{
+    color: rgb(0, 49, 0);
+    font-size: 14px;
+    margin: 0;
+}

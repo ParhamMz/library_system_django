@@ -1,0 +1,17 @@
+.subscription-card{
+    width: 31.55%;
+    display: inline-block;
+    margin: 10px;
+}
+
+#golden-subscription-card{
+    border: 2px solid #FFD700;
+}
+
+#silver-subscription-card{
+    border: 2px solid #C0C0C0;
+}
+
+#bronze-subscription-card{
+    border: 2px solid #CD7F32;
+}

@@ -1,0 +1,4 @@
+pip install python-dateutil
+pip install django-jalali-date
+pip install django[argon2] #https://stackoverflow.com/questions/46416985/django-issue-with-argon2-hasher-in-live-production
+For django Env --> https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system

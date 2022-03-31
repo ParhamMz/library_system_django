@@ -1,0 +1,133 @@
+{% extends 'account/userProfile.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load jformat %}
+
+
+{% block admin_content %}
+<div class="users-list-container">
+    <div class="users-list-page-header-box">
+        <a href="{% url 'account:loan_list_page' %}"><h3 id="header-list-text">لیست امانتی‌ها</h3></a>
+        <form class="search-form" id="search-form-of-users" action="{% url 'account:loan_list_page' %}" method="GET">
+            <input class="form-control me-2 search-users" type="search" placeholder=" نام کاربری مورد نظر را وارد کنید." aria-label="Search" name="searched_name">
+            <button class="btn btn-outline-success" type="submit">جستجو</button>
+        </form>
+        {% if messages %}
+            <div class="success-messages-box">
+                {% for message in messages %}
+                <p  {% if message.tags %} class="{{message.tags}}-message-txt" {% endif %}> {{ message }} </p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <hr id="seprator-header-list">
+
+    {% if all_records %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کاربر</th>
+                    <th>کتاب</th>
+                    <th>تاریخ ثبت امانت</th>
+                    <th>تاریخ تحویل</th>
+                    <th>مسئول ثبت</th>
+                    <th>تنظیمات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in all_records %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#{{record.member}}MemberInfomodal">{{record.member}}</a></td>
+                        <td>{{record.book}}</td>
+                        <td>{{record.loan_date}}</td>
+                        <td>{{record.due_date}}</td>
+                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#{{record.librarian}}AdminInfomodal">{{record.librarian}}</a></td>
+                        <td>
+                            <button type="button" class="btn btn-primary users-edit-btn" title="برگرداندن کتاب" data-bs-toggle="modal" data-bs-target="#{{record.member}}RUSure{{forloop.counter}}Modal">
+                                <img src="{% static 'icons/icons8-return-64.png' %}" alt="return-icon" width="30px">
+                            </button>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="{{record.member}}RUSure{{forloop.counter}}Modal" tabindex="-1" aria-labelledby="{{record.member}}RUSure{{forloop.counter}}ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header user-info-modal-header">
+                              <h5 class="modal-title" id="{{record.member}}RUSure{{forloop.counter}}ModalLabel">هشدار</h5>
+                              <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>آیا کاربر "{{record.member}}"، کتاب "{{record.book}}" را برگرداند؟</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                                <a href="{% url 'account:return_loan' record.member record.book %}" class="btn btn-primary">تائید</a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="{{record.member}}MemberInfomodal" tabindex="-1" aria-labelledby="{{record.member}}MemberInfomodalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header user-info-modal-header">
+                              <h5 class="modal-title" id="{{record.member}}MemberInfomodalLabel">اطلاعات کاربر</h5>
+                              <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>نام و نام خانوادگی: {{record.member.first_name}} {{record.member.last_name}}</p>
+                                <p>ایمیل: {{record.member.email}}</p>
+                                <p>کد ملی: {{record.member.userinformations.national_code}}</p>
+                                <p>تاریخ تولد: {{record.member.userinformations.birth_date}}</p>
+                                <p>شماره همراه: {{record.member.userinformations.phone_no}}</p>
+                                <p>کد دعوت: {{record.member.userinformations.invitation_code}}</p>
+                                <p>تعداد دعوت شدگان توسط کاربر: {{record.member.userinformations.invited_people}}</p>
+                                <p>تعداد کتاب‌های اهدا شده: {{record.member.userinformations.dedicated_book}}</p>
+                                <p>تعداد کتاب‌های امانت گرفته: {{record.member.userinformations.lent_num}}</p>
+                                {% if record.member.userinformations.allowed_to_lend %}
+                                    <p>مجاز به امانت گرفتن: بله</p>
+                                {% else %}
+                                    <p>مجاز به امانت گرفتن: خیر</p>                                  
+                                {% endif %}
+                                {% if record.member.userinformations.subscription_type %}
+                                    <p id="user-subs-type-txt">نوع اشتراک: {{record.member.userinformations.subscription_type}}</p>
+                                    <p>تاریخ شروع اشتراک: {{record.member.userinformations.start_subs|jformat:"%A %d %B %Y %H:%M"}}</p>
+                                    <p>تاریخ اتمام اشتراک: {{record.member.userinformations.end_subs|jformat:"%A %d %B %Y %H:%M"}}</p>
+                                {% else %}
+                                    <p>اشتراک: بدون اشتراک</p>                                  
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="{{record.librarian}}AdminInfomodal" tabindex="-1" aria-labelledby="{{record.librarian}}AdminInfomodalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header user-info-modal-header">
+                              <h5 class="modal-title" id="{{record.librarian}}AdminInfomodal">اطلاعات کتابدار</h5>
+                              <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><img
+                                src="{% static 'icons/icons8-close-30-black.png' %}" width="25px" /></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>نام و نام خانوادگی: {{record.librarian.first_name}} {{record.librarian.last_name}}</p>
+                                <p>ایمیل: {{record.librarian.email}}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>رکوردی برای نمایش وجود ندارد.</p>
+    {% endif %}
+</div>
+{% endblock %}
