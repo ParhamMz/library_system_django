@@ -39,6 +39,7 @@
 
 #navbar-brand{
     display: inline-block;
+    width: 46px;
 }
 
 #myBtn {
@@ -77,25 +78,22 @@
     font-size: 8px;
 }
 
-.bckgrnd-image-container {
+/* .bckgrnd-image-container {
     position: relative;
-}
+} */
 
 .img-fluid {
     width: 100%;
 }
 
 .header-container {
-    position: absolute;
     background-color: rgba(0, 0, 0, 0.75);
-    top: 100px;
-    left: 50%;
     width: 90%;
     margin: 25px;
+    margin-bottom: 75px;
     padding: 35px;
     border: 3px solid white;
     border-radius: 10px;
-    transform: translate(-50%, -50%);
 }
 
 .header-container h2 {
@@ -110,10 +108,12 @@
     font-family: 'Vazir', Arial, sans-serif;
 }
 
+.card {
+    position: unset;
+}
+
 .card-1 {
-    position: absolute;
-    top: 250px;
-    left: 60%;
+    transform: translateX(-45%);
     width: 400px;
     border: 2px solid #CD7F32;
 }
@@ -153,20 +153,16 @@
 }
 
 .card-2 {
-    position: absolute;
-    top: 450px;
-    left: 15%;
     width: 400px;
     border: 2px solid #C0C0C0;
+    transform: translateX(-205%);
 
 }
 
 .card-3 {
-    position: absolute;
-    top: 675px;
-    left: 60%;
     width: 400px;
     border: 2px solid #FFD700;
+    transform: translateX(-45%);
 }
 
 .pass-reset-done-container {
@@ -326,3 +322,64 @@
     font-family: 'Vazir', Arial, sans-serif;
 
 }
+
+
+@media only screen and (max-width: 600px) {
+
+    * p{
+        font-size: 14px;
+    }
+
+    .navbar-container a {
+        font-size: 18px;
+    }
+
+    .nav-link {
+        padding: 0.5rem;
+    }
+
+    #navbar-brand{
+        width: 35px;
+    }
+
+    .modal-dialog{
+        margin: 2.5rem;
+    }
+
+    .card {
+        width: 75%;
+        transform: translateX(-15%);
+    }
+
+    .logo-container{
+        display: block;
+        text-align: center;
+    }
+
+    .footer-txt-container{
+        display: block;
+        text-align: center;
+    }
+
+    .social-box{
+        display: inline-block;
+    }
+
+    .fa{
+        padding: 7.5px;
+        font-size: 20px;
+        vertical-align: top;
+    }
+
+    .gmail-box{
+        margin-right: 15px;
+    }
+
+    .technology-box{
+        margin-top: 25px;
+    }
+
+    #last-txt{
+        font-size: 12px;
+    }
+} 
