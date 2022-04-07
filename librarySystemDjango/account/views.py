@@ -17,6 +17,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.core.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 import urllib
+import urllib.request as urllib_req_module
 import json
 import datetime
 import jdatetime
@@ -107,8 +108,8 @@ def user_login(request):
             'response': recaptcha_response
         }
         data = urllib.parse.urlencode(values).encode()
-        req =  urllib.request.Request(url, data=data)
-        response = urllib.request.urlopen(req)
+        req =  urllib_req_module.Request(url, data=data)
+        response = urllib_req_module.urlopen(req)
         result = json.loads(response.read().decode())
         ''' End reCAPTCHA validation '''
 

@@ -28,6 +28,7 @@ def main_book_page(request):
 
     if available_que:
         available_que = True
+        books = Book.objects.filter(available=True)
     else:
         books = Book.objects.all()
 
