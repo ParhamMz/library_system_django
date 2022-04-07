@@ -27,7 +27,7 @@ SECRET_KEY = 'f9+!5j$p^x7jzqo(dy4wncvgo7gdd@ob8&u8gg3)@5+sg%5853^*n0l@i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['parhammz.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'parhammz.pythonanywhere.com']
 
 
 # Application definition
