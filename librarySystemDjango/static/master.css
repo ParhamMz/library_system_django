@@ -331,7 +331,7 @@
     }
 
     .navbar-container a {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .nav-link {
@@ -340,6 +340,7 @@
 
     #navbar-brand{
         width: 35px;
+        margin-right: 0;
     }
 
     .modal-dialog{
