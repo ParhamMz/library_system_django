@@ -326,12 +326,32 @@
 
 @media only screen and (max-width: 600px) {
 
-    * p{
+    * label{
         font-size: 14px;
     }
 
+    * p{
+        font-size: 12px;
+    }
+
+    * a{
+        font-size: 12px;
+    }
+
+    * h1{
+        font-size: 25px;
+    }
+
+    * h2 {
+        font-size: 19px;
+    }
+
+    * h3{
+        font-size: 18px;
+    }
+
     .navbar-container a {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .nav-link {
@@ -355,6 +375,10 @@
         transform: translateX(-15%);
     }
 
+    #about-img{
+        width: 150px;
+    }
+
     .logo-container{
         display: block;
         text-align: center;
@@ -369,14 +393,22 @@
         display: inline-block;
     }
 
+    .social-icons-txt {
+        font-size: 12px;
+    }
+
     .fa{
         padding: 7.5px;
         font-size: 20px;
-        vertical-align: top;
+        vertical-align: unset;
     }
 
     .gmail-box{
         margin-right: 15px;
+    }
+
+    .logo-container #about-img{
+        margin-top: 10px;
     }
 
     .technology-box{
@@ -384,6 +416,30 @@
     }
 
     #last-txt{
-        font-size: 12px;
+        font-size: 10px;
+    }
+
+    .technology-item{
+        margin: 10px 16px;
+    }
+
+    .technology-item img{
+        width: 35px;
+    }
+
+    .card-header h3{
+        font-size: 18px;
+    }
+
+    .btn{
+        font-size: 0.9rem;
+    }
+
+    #myBtn{
+        padding: 1px;
+    }
+
+    .form-control{
+        font-size: 0.9rem;
     }
 } 

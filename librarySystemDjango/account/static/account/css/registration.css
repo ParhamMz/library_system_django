@@ -39,7 +39,6 @@
 }
 
 .form-container{
-
     background-color: white;
     margin-top: 20px;
     padding: 30px;
@@ -108,4 +107,42 @@
 
 .show-password-container{
     margin: 10px 0;
+}
+
+@media only screen and (max-width: 600px){
+    .form-container{
+        width: 95%;
+    }
+
+    .form-container .form-group{
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    .register-form small{
+        font-size: 10px;
+    }
+
+    .register-form .invited-field{
+        font-size: 12px;
+    }
+    
+    .cancel-btn{
+        margin-right: 8.2%;
+    }
+
+    #ps{
+        display: block;
+        margin-top: 15px;
+        margin: 0;
+    }
+
+    .swal-modal {
+        width: calc(85% - 20px);
+    }
+
+    .swal-title{
+        font-size: 15px;
+    }
 }

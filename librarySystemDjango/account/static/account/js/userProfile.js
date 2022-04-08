@@ -1,6 +1,6 @@
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
 function openNav() {
-    mybtn = document.querySelector('.side-navbar-btn');
+    var mybtn = document.querySelector('.side-navbar-btn');
     mybtn.setAttribute('onclick', 'closeNav()');
     document.getElementById("mySidenav").style.width = "300px";
     document.getElementById("user-profile-sidenav").style.marginRight = "300px";
@@ -21,7 +21,7 @@ function openNav() {
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
 function closeNav() {
-    mybtn = document.querySelector('.side-navbar-btn');
+    var mybtn = document.querySelector('.side-navbar-btn');
     mybtn.setAttribute('onclick', 'openNav()');
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("user-profile-sidenav").style.marginRight = "0";

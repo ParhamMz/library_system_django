@@ -3,53 +3,64 @@
 
 {% block content %}
     <div class="main-books-container">
-        <div class="search-filters-box">
-            <h3>فیلتر</h3>
-            <hr>
-            <div class="filter-box-container">
-                <form action="{% url 'books:main_books_page' %}" method="GET">
-                    <div>
-                        <label for="slct-search-base">جستجو بر اساس</label>
-                        <select class="form-select slct-book-info-form" id="slct-search-base" name="search-base">
-                            <option selected>انتخاب کنید...</option>
-                            <option value="title">عنوان</option>
-                            <option value="author">نویسنده</option>
-                            <option value="translator">مترجم</option>
-                            <option value="publisher">انتشارات</option>
-                        </select>
-                        <div class="book-search-small-box">
-                            <input type="text" class="form-control book-search-input" placeholder="اطلاعات مورد نظر را وارد کنید..." name="book-info">
-                            <button type="submit" class="btn book-search-btn" title="جستجو"><img src="{% static 'icons/icons8-search-32-green.png' %}" alt="srch-icon" width="20px"></button>
-                        </div>
-                    </div>
-                    <div class="other-checkbox-container">
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="free-checkbox">
-                          <label class="form-check-label" for="flexSwitchCheckDefault">عمومی</label>
-                        </div>
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="premium-checkbox">
-                          <label class="form-check-label" for="flexSwitchCheckChecked">ویژه</label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="available-checkbox">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">موجود در کتابخانه</label>
-                        </div>
-                    </div>
-                    <div class="categories-container">
-                        <h5>دسته بندی</h5>
-                        <hr>
-                        {% for cat in categories %}
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="categories-radio-btn" id="flexRadioDefault{{forloop.counter}}" value="{{cat.name}}">
-                                <label class="form-check-label" for="flexRadioDefault{{forloop.counter}}">{{cat.name}}</label>
+        <div class="main-filters-container">
+            <div class="responsive-filter-box">
+                <button class="btn btn-dark show-filter-btn" onclick="showFilter()">
+                    <img src="{% static 'icons/icons8-list-50-white.png' %}" alt="filter" width="25px">
+                    <p>تغییر فیلتر</p>
+                </button>
+                <button type="button" class="btn hide-filter-btn" onclick="hideFilter()">
+                    <img src="{% static 'icons/icons8-close-30-black.png' %}" width="25px"/>
+                </button>
+            </div>
+            <div class="search-filters-box">
+                <h3>فیلتر</h3>
+                <hr>
+                <div class="filter-box-container">
+                    <form action="{% url 'books:main_books_page' %}" method="GET">
+                        <div>
+                            <label for="slct-search-base">جستجو بر اساس</label>
+                            <select class="form-select slct-book-info-form" id="slct-search-base" name="search-base">
+                                <option selected>انتخاب کنید...</option>
+                                <option value="title">عنوان</option>
+                                <option value="author">نویسنده</option>
+                                <option value="translator">مترجم</option>
+                                <option value="publisher">انتشارات</option>
+                            </select>
+                            <div class="book-search-small-box">
+                                <input type="text" class="form-control book-search-input" placeholder="اطلاعات مورد نظر را وارد کنید..." name="book-info">
+                                <button type="submit" class="btn book-search-btn" title="جستجو"><img src="{% static 'icons/icons8-search-32-green.png' %}" alt="srch-icon" width="20px"></button>
                             </div>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary confirm-filters-btn">اعمال فیلتر</button>
-                </form>
-                
-            </div>   
+                        </div>
+                        <div class="other-checkbox-container">
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="free-checkbox">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">عمومی</label>
+                            </div>
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="premium-checkbox">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">ویژه</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="available-checkbox">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">موجود در کتابخانه</label>
+                            </div>
+                        </div>
+                        <div class="categories-container">
+                            <h5>دسته بندی</h5>
+                            <hr>
+                            {% for cat in categories %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categories-radio-btn" id="flexRadioDefault{{forloop.counter}}" value="{{cat.name}}">
+                                    <label class="form-check-label" for="flexRadioDefault{{forloop.counter}}">{{cat.name}}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary confirm-filters-btn" id="change-filter">اعمال فیلتر</button>
+                    </form>
+                    
+                </div>   
+            </div>
         </div>
         <div class="book-cards-container">
             {% if is_book %}
