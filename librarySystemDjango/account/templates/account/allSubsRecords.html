@@ -16,27 +16,29 @@
         <hr id="seprator-header-list">
 
         {% if subs_records and not no_record %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>ردیف</th>
-                        <th>کاربر</th>
-                        <th>نوع اشتراک</th>
-                        <th>زمان ثبت</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i, record in subs_records %}
+            <div class="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{forloop.counter}}</td>
-                            <td>{{record.user}}</td>
-                            <td>{{record.subscription_type}}</td>
-                            <td>{{record.set_date|jformat:"%A %d %B %Y %H:%M"}}</td>
+                            <th>ردیف</th>
+                            <th>کاربر</th>
+                            <th>نوع اشتراک</th>
+                            <th>زمان ثبت</th>
                         </tr>
-                        
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for i, record in subs_records %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{record.user}}</td>
+                                <td>{{record.subscription_type}}</td>
+                                <td>{{record.set_date|jformat:"%A %d %B %Y %H:%M"}}</td>
+                            </tr>
+                            
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% else %}
             <p>رکوردی برای نمایش وجود ندارد.</p>
         {% endif %}

@@ -114,3 +114,37 @@
 #user-subs-type-txt{
     display: inline-block;
 }
+
+@media only screen and (max-width:600px){
+    * th{
+        font-size: 0.85rem;
+    }
+
+    * td{
+        font-size: 0.8rem;
+    }
+
+    .table-container{
+        overflow-x: auto;
+    }
+
+    .users-list-page-header-box form {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-users {
+        width: 70%;
+        font-size: 12px;
+    }
+
+    .cancel-show-userinfo-btn {
+        margin-left: 22.3%;
+        margin-top: 15px;
+    }
+
+    .buy-sub-form{
+        font-size: 0.75rem;
+    }
+}

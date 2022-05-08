@@ -75,11 +75,11 @@
                         <div class="col-md-8">
                             <div class="card-body book-card-body">
                                 <a href="{% url 'books:book_info_page' book.title %}" id="book-title" target="_blank"><h4 class="card-title">{{book.title}}</h4></a>
-                                <p class="card-text">نویسنده: {{book.author}}</p>
+                                <p class="card-text" id="book-author">نویسنده: {{book.author}}</p>
                                 {% if book.translator %}
-                                    <p class="card-text">مترجم: {{book.translator}}</p>
+                                    <p class="card-text" id="book-trans">مترجم: {{book.translator}}</p>
                                 {% else %}  
-                                    <p>زبان: فارسی</p>
+                                    <p id="book-lang">زبان: فارسی</p>
                                 {% endif %}
                                 {% if book.free %}
                                     <p class="card-text">عمومی <img src="{% static 'icons/icons8-free-60.png' %}" alt="free-icon" width="25px"></p>

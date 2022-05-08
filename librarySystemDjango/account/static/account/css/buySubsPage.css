@@ -15,3 +15,11 @@
 #bronze-subscription-card{
     border: 2px solid #CD7F32;
 }
+
+@media only screen and (max-width:600px){
+    .subscription-card{
+        width: 75%;
+        display: block;
+        margin-top: 25px;
+    }
+}

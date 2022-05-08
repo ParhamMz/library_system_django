@@ -2,8 +2,14 @@
 function openNav() {
     var mybtn = document.querySelector('.side-navbar-btn');
     mybtn.setAttribute('onclick', 'closeNav()');
+    var is_phone = window.matchMedia("(max-width: 600px)");
+    if(is_phone.matches){
+        document.getElementById("mySidenav").style.width = "200px";
+    }
     document.getElementById("mySidenav").style.width = "300px";
-    document.getElementById("user-profile-sidenav").style.marginRight = "300px";
+    if (!is_phone.matches) {
+        document.getElementById("user-profile-sidenav").style.marginRight = "300px";
+    }
     document.getElementById("btn-container").style.display = "none";
     if (document.getElementById('search-form-of-users')){
         document.getElementById('search-form-of-users').style.width = "71%";

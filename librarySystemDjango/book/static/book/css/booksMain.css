@@ -180,4 +180,22 @@
     .book-search-btn{
         margin-right: 4px;
     }
+
+    .book-card{
+        display: block;
+        height: unset;
+        width: 100%;
+    }
+
+    #book-author{
+        display: none;
+    }
+
+    #book-lang{
+        display: none;
+    }
+
+    #book-trans{
+        display: none;
+    }
 }

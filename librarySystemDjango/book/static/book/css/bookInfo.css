@@ -289,3 +289,37 @@
     font-weight: 800;
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.05);
 }
+
+@media only screen and (max-width:600px){
+    .book-small-container{
+        display: block;
+        width: 100%;
+    }
+    
+    .book-info-container{
+        display: block;
+        width: 100%;
+        margin-top: 35px;
+    }
+
+    #brand-txt-book{
+        display: none;
+    }
+
+    #brand-txt-book img{
+        display: none;
+    }
+
+    .free-icon-abs {
+        display: none;
+    }
+
+    .share-option{
+        display: block;
+        margin-top: 10px;
+    }
+
+    .share-container{
+        margin: auto;
+    }
+}

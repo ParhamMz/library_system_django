@@ -49,7 +49,7 @@
 
     </head>
     <body>
-        {% if request.path == '/' %}
+        {% if request.path == '/' and not request.user.is_authenticated %}
             <div class="modal fade" id="staticBackdropFirstPage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropFirstPageLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

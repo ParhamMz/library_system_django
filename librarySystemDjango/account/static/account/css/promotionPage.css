@@ -28,3 +28,49 @@
     width: 45%;
     margin-right: 4.5%;
 }
+
+@media only screen and (max-width:600px){
+    * label{
+        font-size: 14px;
+    }
+
+    * p{
+        font-size: 12px;
+    }
+
+    * a{
+        font-size: 12px;
+    }
+
+    * h1{
+        font-size: 25px;
+    }
+
+    * h2 {
+        font-size: 19px;
+    }
+
+    * h3{
+        font-size: 18px;
+    }
+
+    .promote-page-container{
+        width: 75%;
+        height: unset;
+        top: 10%;
+        transform: translate(-50%, 0);
+    }
+
+    .delete-acc-text{
+        font-size: 15px;
+    }
+
+    .cancel-acc-btn {
+        margin-left: 3.7%;
+        font-size: 0.9rem;
+    }
+
+    .promote-acc-btn{
+        font-size: 0.9rem;
+    }
+}

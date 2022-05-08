@@ -21,30 +21,32 @@
     <hr id="seprator-header-list">
 
     {% if books %}
-        <table>
-            <thead>
-                <tr>
-                    <th>ردیف</th>
-                    <th>عنوان</th>
-                    <th>اطلاعات کتاب</th>
-                    <th>تنظیمات</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
+        <div class="table-container">
+            <table>
+                <thead>
                     <tr>
-                        <td>{{forloop.counter}}</td>
-                        <td>{{book.title}}</td>
-                        <td><a href="{% url 'books:book_info_page' book.title %}">{{book.title}}</a></td>
-                        <td>
-                            <a href="{% url 'account:update_book' book.title %}" class="btn btn-primary users-edit-btn" title="ویرایش"><img src="{% static 'icons/icons8-edit-64.png' %}" alt="edit-icon" width="30px"></a>
-                            <a href="{% url 'account:delete_book' book.title %}" class="btn btn-danger users-del-btn" title="حذف"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></a>
-                        </td>
+                        <th>ردیف</th>
+                        <th>عنوان</th>
+                        <th>اطلاعات کتاب</th>
+                        <th>تنظیمات</th>
                     </tr>
-                    
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{book.title}}</td>
+                            <td><a href="{% url 'books:book_info_page' book.title %}">{{book.title}}</a></td>
+                            <td>
+                                <a href="{% url 'account:update_book' book.title %}" class="btn btn-primary users-edit-btn" title="ویرایش"><img src="{% static 'icons/icons8-edit-64.png' %}" alt="edit-icon" width="30px"></a>
+                                <a href="{% url 'account:delete_book' book.title %}" class="btn btn-danger users-del-btn" title="حذف"><img src="{% static 'icons/icons8-delete-100-white.png' %}" alt="del-icon" width="30px"></a>
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <p>کتابی برای نمایش وجود ندارد.</p>
     {% endif %}

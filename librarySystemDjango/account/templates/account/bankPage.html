@@ -19,7 +19,7 @@
     <div class="bank-page-container">
         <form method='POST'>
             {% csrf_token %}
-            <label for="card-num-inp">لطفا شماره کارت خود را وارد نمایید:</label>
+            <label id="bank-card-label" for="card-num-inp">لطفا شماره کارت خود را وارد نمایید:</label>
             <input type="text" name="card-num-inp" id="card-num-inp" class="form-control only-number-input" minlength="16" maxlength="16" required>
             <a href="{% url 'account:subs_services_page' %}" class="btn btn-secondary cancel-del-acc-btn">انصراف</a>
             <button type="submit" class="btn btn-danger del-acc-btn" id="payBTN">پرداخت</button>
