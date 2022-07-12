@@ -169,7 +169,7 @@ def book_info(request, book_title):
         else:
             new_obj = UserFavoriteBook(user=user, title=the_book)
             new_obj.save()
-        return redirect(f'/books/book/{book_title}/')
+        return redirect('/books/book/{book_title}/'.format(book_title=book_title))
     context = {
         'loggedin_user': user,
         'user_profile': user_profile,
